@@ -2,6 +2,11 @@
 === OpenSpaces Data Example ===
 ===============================
 
+ Tutorial
+------------
+This example is described in details in the following wiki tutorial page:
+http://docs.gigaspaces.com/sbp/the-openspaces-data-example.html
+
 1. MOTIVATION
 
 The data example is an abstract example showing off most of OpenSpaces features, namely:
@@ -30,20 +35,23 @@ The example has three modules:
 	    
 3. BUILD AND DEPLOYMENT
 
-The example uses ant as its build tool and uses a standard build.xml file. It comes with
-a build script that runs ant automatically. Running the build script with no parameters within
+The example uses maven as its build tool. It comes with
+a build script that runs maven automatically. Running the build script with no parameters within
 the current directory will list all the relevant tasks that can be run with this example.
 
-Running 'build.(sh/bat) build' will compile all the different modules. In case of the Processor
+Running 'build.(sh/bat) compile' will compile all the different modules. In case of the Processor
 and Feeder modules, it will compile the classes directly into their respective PU structure.
 
-Running 'build.(sh/bat) dist' will finalize the processing unit structure of both the Processor
+Running 'build.(sh/bat) package' will finalize the processing unit structure of both the Processor
 and the Feeder by copying the Common module jar file into the 'lib' directory within the 
 processing unit structure. In case of the processor module, it will copy the jar file to
-'processor/pu/data-processor/lib', and will make 'processor/pu/data-processor' a ready
+'processor/target/org.openspaces.example.data-processor/lib', and will make 'processor/target/data-processor' a ready
 to use processing unit.
 
-In order to deploy the data example onto the Service Grid, simply run gs-agent which will start
+Running 'build.(sh/bat) intellij' will create run configuration for IntelliJ IDE, allowing you to run the
+Processor and the Feeder using IntelliJ run (or degub) targets.
+
+In order to deploy the data example onto the Service Grid, simply run gigaspaces agent (gs-agent.sh/bat) which will start
  a GSM and *two* GSCs will need to be started (note, we need two GSCs because of the SLA defined 
 within the processor module). Next, 'build.(sh/bat) deploy' will need to be executed. The task
 will deploy the processor.jar and the feeder.jar into the running GSM, 
@@ -51,12 +59,14 @@ This will cause the feeder to be deployed into one of the GSC and start feeding 
 the two processing units.
 Run the GS-UI in order to see the 4 PU instances deployed (two partitions, each with one backup).
 
+Running 'build.(sh/bat) undeploy' will remove all of the processing units of this example from the service grid.
+
 Another option to deploy the example can be using the GS CLI using the deploy option. An interesting
 example of externally providing the SLA that applies to the deployed processing unit can be running
-'gs.(sh/bat) deploy -sla ../examples/data/partitioned-sla.xml ../examples/data/processor/dist/processor.jar'.
+'gs.(sh/bat) deploy -sla ../examples/data/partitioned-sla.xml ../examples/data/processor/target/data-processor.jar'.
 This allows to deploy the processor example using a partitioned space (and not a partitioned-sync2backup)
 which is defined in the pu.xml.
-In order to run the feeder using the GS CLI please execute 'gs.(sh/bat) deploy ../examples/data/feeder/dist/feeder.jar'.
+In order to run the feeder using the GS CLI please execute 'gs.(sh/bat) deploy ../examples/data/feeder/target/data-feeder.jar'.
 
 Some ways to play with the examples can be:
 
