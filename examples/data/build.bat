@@ -22,7 +22,7 @@ if "%1" == "clean" (
 			if "%1" == "deploy" (
 				cd %DIR_NAME%		
 				call "%XAP_HOME%\bin\gs.bat" deploy processor\target\data-processor.jar
-				call "%XAP_HOME%\bin\gs.bat" deploy processor\target\data-feeder.jar
+				call "%XAP_HOME%\bin\gs.bat" deploy feeder\target\data-feeder.jar
 				cd %CD%
 			) else (
 				if "%1" == "undeploy" (
