@@ -2,7 +2,7 @@
 
 call "%~dp0..\..\bin\setenv.bat"
 set DIR_NAME=%~dp0
-if not defined M2_HOME set M2_HOME=%~dp0..\..\tools\maven\apache-maven-3.0.2 rem needed to upgraded to 3.2.5
+if not defined M2_HOME set M2_HOME=%~dp0..\..\tools\maven\apache-maven-3.2.5
 
 if "%1" == "clean" (
   cd %DIR_NAME%
